@@ -11,7 +11,6 @@ namespace Lib
         {
             List<int> leftList = [];
             List<int> rightList = [];
-            int distances = 0;
 
             foreach (string line in input)
             {
@@ -22,7 +21,19 @@ namespace Lib
 
             leftList.Sort();
             rightList.Sort();
-           
+
+            if (isBonus)
+            {
+                return findSimilarity(leftList, rightList);
+            }
+            else
+            {
+                return findDistances(leftList, rightList);
+            }
+        }
+        public string findDistances(List<int> leftList, List<int> rightList)
+        {
+            int distances = 0;
             for (int i = 0; i < leftList.Count; i++)
             {
                 var distance = rightList[i] - leftList[i];
@@ -32,8 +43,17 @@ namespace Lib
                 }
                 distances += distance;      
             }
-
             return distances.ToString();
+        }
+        public string findSimilarity(List<int> leftList, List<int> rightList)
+        {
+            int similarity = 0;
+            for (int i = 0; i < leftList.Count; i++)
+            {
+                int target = leftList[i];
+                similarity += target * rightList.Count(n => n == target);
+            }
+            return similarity.ToString();
         }
     }
 }
