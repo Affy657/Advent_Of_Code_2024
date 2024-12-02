@@ -16,7 +16,8 @@ public class AlgoBuilder
     {
         List<IAlgo> algos = new()
         {
-            new AlgoDay01()    
+            new AlgoDay01(),
+            new AlgoDay02()
         };
         return algos.FirstOrDefault(algo =>
         algo.GetDayAndBonus().Day == this.Day
