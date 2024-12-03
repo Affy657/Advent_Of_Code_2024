@@ -9,14 +9,6 @@ namespace Lib
 
         public string Solve(string[] input, bool isBonus = false)
         {
-          /* input :
-            7 6 4 2 1
-            1 2 7 8 9
-            9 7 6 2 1
-            1 3 2 4 5
-            8 6 4 4 1
-            1 3 6 7 9
-            */
             int numberOfSafeReport = 0;
 
             foreach (string line in input)
@@ -26,26 +18,50 @@ namespace Lib
                     .Select(int.Parse)
                     .ToList();
 
-                bool isIncreasing = report.Zip(report.Skip(1), (a, b) => b > a).All(x => x);
-                bool isDecreasing = report.Zip(report.Skip(1), (a, b) => b < a).All(x => x);
-
-                if (isIncreasing)
+                if (CheckReport(report))
                 {
-                    bool areDifferencesValid = report.Zip(report.Skip(1), (a, b) => b - a)
-                                          .All(diff => diff >= 1 && diff <= 3);
-                    if (areDifferencesValid)
                     numberOfSafeReport++;
                 }
-                else if (isDecreasing)
+                else if (isBonus)
                 {
-                    bool areDifferencesValid = report.Zip(report.Skip(1), (a, b) => a - b)
-                                          .All(diff => diff >= 1 && diff <= 3);
-                    if (areDifferencesValid)
-                    numberOfSafeReport++;
-                }
+                    for (int i = 0; i < report.Count; i++)
+                    {
+                        List<int> newReport = new(report);
+                        newReport.RemoveAt(i);
 
+                        if ( CheckReport(newReport))
+                        {
+                            numberOfSafeReport++;
+                            break;
+                        }
+                    }
+                }
             }
             return numberOfSafeReport.ToString();
+        }
+
+        public bool AreDifferencesValid(List<int> report, bool isReversed = false)
+        {
+            return report.Zip(report.Skip(1), (a, b) => isReversed ? a - b : b - a)
+                         .All(diff => diff >= 1 && diff <= 3);
+        }
+
+        public bool CheckReport(List<int> report)
+        {
+            bool isIncreasing = report.Zip(report.Skip(1), (a, b) => b > a).All(x => x);
+            bool isDecreasing = report.Zip(report.Skip(1), (a, b) => b < a).All(x => x);
+
+            if (isIncreasing)
+            {
+                if (AreDifferencesValid(report))
+                    return true;
+            }
+            else if (isDecreasing)
+            {
+                if (AreDifferencesValid(report, isReversed: true))
+                    return true;
+            }
+            return false;
         }
     }
 }
