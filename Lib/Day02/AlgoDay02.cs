@@ -5,7 +5,7 @@ namespace Lib
 {
     public class AlgoDay02 : IAlgo
     {
-        public DayAndBonus GetDayAndBonus() => new() { Day = 2, Bonus = true };
+        public DayAndBonus GetDayAndBonus() => new() { Day = 2 };
 
         public string Solve(string[] input, bool isBonus = false)
         {

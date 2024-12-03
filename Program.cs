@@ -54,7 +54,7 @@ if (day >= 1 && day <= 25)
         }
 
         Console.WriteLine("\n[INFO] Exécution de l'algorithme...\n");
-        string result = algo.Solve(data, true);
+        string result = algo.Solve(data, isBonus);
 
         Console.WriteLine("[RESULTAT] Résultat de l'algorithme :");
         Console.WriteLine("\n");

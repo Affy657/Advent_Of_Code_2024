@@ -5,7 +5,7 @@ namespace Lib
     public class AlgoDay01 : IAlgo
     {
         private const string separator = "   ";
-        public DayAndBonus GetDayAndBonus() => new() { Day = 1, Bonus = true };
+        public DayAndBonus GetDayAndBonus() => new() { Day = 1 };
 
         public string Solve(string[] input, bool isBonus = false)
         {
