@@ -16,10 +16,10 @@ public class AlgoBuilder
         {
             new AlgoDay01(),
             new AlgoDay02(),
-            new AlgoDay03()/*,
+            new AlgoDay03(),
             new AlgoDay04(),
             new AlgoDay05(),
-            new AlgoDay06(),
+            new AlgoDay06()/*,
             new AlgoDay07(),
             new AlgoDay08(),
             new AlgoDay09(),
